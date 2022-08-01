@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://http://2019yyy.github.io</id>
+    <id>http://2019yyy.github.io</id>
     <title>yyy&apos;s blog</title>
-    <updated>2022-08-01T11:32:03.824Z</updated>
+    <updated>2022-08-01T11:37:12.787Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://http://2019yyy.github.io"/>
-    <link rel="self" href="http://http://2019yyy.github.io/atom.xml"/>
+    <link rel="alternate" href="http://2019yyy.github.io"/>
+    <link rel="self" href="http://2019yyy.github.io/atom.xml"/>
     <subtitle>打不动的分块,戒不掉的珂毒</subtitle>
-    <logo>http://http://2019yyy.github.io/images/avatar.png</logo>
-    <icon>http://http://2019yyy.github.io/favicon.ico</icon>
+    <logo>http://2019yyy.github.io/images/avatar.png</logo>
+    <icon>http://2019yyy.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, yyy&apos;s blog</rights>
     <entry>
         <title type="html"><![CDATA[Hello World]]></title>
-        <id>http://http://2019yyy.github.io/post/hello-world/</id>
-        <link href="http://http://2019yyy.github.io/post/hello-world/">
+        <id>http://2019yyy.github.io/post/hello-world/</id>
+        <link href="http://2019yyy.github.io/post/hello-world/">
         </link>
         <updated>2022-08-01T10:42:33.000Z</updated>
         <content type="html"><![CDATA[<p>Hello World</p>
