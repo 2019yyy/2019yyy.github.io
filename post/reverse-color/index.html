@@ -1,169 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://2019yyy.github.io</id>
-    <title>yyy&apos;s blog</title>
-    <updated>2022-08-01T12:31:57.848Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://2019yyy.github.io"/>
-    <link rel="self" href="https://2019yyy.github.io/atom.xml"/>
-    <subtitle>打不动的分块,戒不掉的珂毒</subtitle>
-    <logo>https://2019yyy.github.io/images/avatar.png</logo>
-    <icon>https://2019yyy.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, yyy&apos;s blog</rights>
-    <entry>
-        <title type="html"><![CDATA[「杀人狂前传」题目及题解]]></title>
-        <id>https://2019yyy.github.io/post/sha-ren-kuang-qian-chuan-ti-mu-ji-ti-jie/</id>
-        <link href="https://2019yyy.github.io/post/sha-ren-kuang-qian-chuan-ti-mu-ji-ti-jie/">
-        </link>
-        <updated>2022-08-01T12:22:16.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目描述">「题目描述」</h2>
-<blockquote>
-<p>如果痛恨所处的黑暗，请你成为你想要的光。<br>
-——塞尔维亚的天空</p>
-</blockquote>
-<p>硅基联邦中有若干个帝国,每个帝国内部都建有铁路,这些铁路链接的两个城市之间的距离都为1,可以使帝国内的城市互相到达,且每两个城市中只有一条路径能够互相到达,ckx决定将这些帝国通过这些距离为1的铁路连在一起,合并成为一个大帝国,联在一起后,同样是每两个城市中只有一条路径能够互相到达</p>
-<p>ckx十分贪婪,希望这个帝国中最远的两个城市之间的距离最近.于是身为ckx的女儿zyx,要指挥工人队伍来链接这些帝国</p>
-<p>但是zyx遗传了<strong>ckx</strong>的<strong>智商</strong>，并不知道每个帝国中最远的两个城市之间的距离是多少，于是请你来帮忙</p>
-<h2 id="输入格式">「输入格式」</h2>
-<p>第一行三个整数<em>n</em>,<em>m</em>,<em>k</em>,分别表示所有帝国中的城市数量,原有帝国中的铁路数量,zyx有多少个合并帝国的操作和问题</p>
-<p>接下来<em>m</em>行每行两个整数<em>x</em>,<em>y</em>表示x号城市和y号城市之间有铁路</p>
-<p>接下来k行每行先输入操作的种类<em>opt</em></p>
-<p>当<em>opt</em>=1时,输入一个整数<em>x</em>,输出<em>x</em>所在帝国中最远的两个城市之间的距离是多少</p>
-<p>当<em>opt</em>=2时,输入两个整数<em>x</em>,<em>y</em>,将<em>x</em>和<em>y</em>所在的帝国合并</p>
-<h2 id="输出格式">「输出格式」</h2>
-<p>对于每一个<em>opt</em>=1,输出一个整数作为答案</p>
-<h2 id="样例">「样例」</h2>
-<h3 id="样例输入">样例输入</h3>
-<pre><code>10 5 5
-2 6
-8 2
-4 3
-4 7
-1 9
-1 3 
-1 1 
-1 1 
-1 2 
-1 8 
-</code></pre>
-<h3 id="样例输出">样例输出</h3>
-<pre><code>2
-1
-1
-2
-2
-</code></pre>
-<h2 id="数据规模及限制">「数据规模及限制」</h2>
-<p>对于40%的数据m≤n≤100,k≤50</p>
-<p>对于100%的数据m≤n≤100000,k≤50000</p>
-<p>ps:题目翻译成人话就是<a href="https://www.bilibili.com/video/BV1GJ411x7h7?spm_id_from=333.337.search-card.all.click">https://www.luogu.com.cn/paste/yj39adfw</a></p>
-<p>by yyy</p>
-<h2 id="题解">「题解」</h2>
-<p>首先题目翻译成人话是:(<s>这回是真的</s>)</p>
-<p>给你一个森林,每一个操作合并其中的两棵树,并查询一个点所在树的直径长度</p>
-<p>首先考虑怎么得知一个点所在的树,我们可以用并查集维护</p>
-<p>然后问题在于怎么将两条直径合并成一条并要求这条直径最短</p>
-<p>于是我们考虑维护每一棵树的直径长度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>数组</p>
-<p>我们首先考虑每棵树对合并到一起的直径能做出的最小贡献(注意不算把两棵树链接的那条边</p>
-<p>举个例子</p>
-<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/image_hosting/ck322i4r.png" alt="" loading="lazy"></figure>
-<p>我们考虑根是4的这棵树对总体两棵树合并连出的树对直径造成的最小贡献</p>
-<p>我们从1开始想,显然,做出的贡献不可能是1,因为如果是1的话,这条直径的另一边显然会对这条直径做出更大贡献,既这种情况:</p>
-<figure data-type="image" tabindex="2"><img src="https://cdn.luogu.com.cn/upload/image_hosting/hav9m7md.png" alt="" loading="lazy"></figure>
-<p>显然我们让直径对半开,才不会出现另一边做出贡献的情况</p>
-<p>对于每一棵树,都可以这样考虑</p>
-<p>所以合并两棵树l,r的最小值是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⌈</mo><mi>f</mi><mo>[</mo><mi>l</mi><mo>]</mo><mo>⌉</mo><mo>+</mo><mo>⌈</mo><mi>f</mi><mo>[</mo><mi>r</mi><mo>]</mo><mo>⌉</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\lceil f[l] \rceil+\lceil f[r] \rceil+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌈</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mclose">]</span><span class="mclose">⌉</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌈</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mclose">]</span><span class="mclose">⌉</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span></p>
-<p>于是这道题就愉快的做完了</p>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-struct Edge{
-    int next,to;
-} a[15000000];
-int head[15000000],cnt;
-bool vis[15000000];
-void addEdge(int x,int y){
-    a[++cnt].next=head[x];
-    a[cnt].to=y;
-    head[x]=cnt;
-}
-int fa[1500000],f[1500000];
-int getfa(int x){
-    if(fa[x]==x){
-        return x;
-    }
-    return fa[x]=getfa(fa[x]);
-}
-void merge(int x,int y){
-    int fax=getfa(x);
-    int fay=getfa(y);
-    fa[fax]=fay;
-}
-int ans,final;
-void getdiametre(int x,int h){
-	vis[x]=true;
-	for(int i=head[x];i;i=a[i].next){
-		if(!vis[a[i].to]){
-			if(h+1&gt;ans){
-				ans=h+1;
-				final=a[i].to;
-			}
-			getdiametre(a[i].to,h+1);
-		}
-	}
-	vis[x]=false;
-	return;	
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
 
-int main(){
-    int n,m,k;
-    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;
-    for(int i=1;i&lt;=n;i++){
-        fa[i]=i;
-    }
-    for(int i=1;i&lt;=m;i++){
-        int x,y;
-        cin&gt;&gt;x&gt;&gt;y;
-        addEdge(x,y);
-        addEdge(y,x);
-        merge(x,y);
-    }
-    for(int i=1;i&lt;=n;i++){
-        ans=0;
-        final=i;
-        if(fa[i]==i){
-            getdiametre(i,0);
-            getdiametre(final,0);
-            f[i]=ans;
-        }
-    }
-    for(int i=1;i&lt;=k;i++){
-        int opt,x,y;
-        cin&gt;&gt;opt&gt;&gt;x;
-        if(opt==2){
-            cin&gt;&gt;y;
-            x=getfa(x);
-            y=getfa(y);
-            if(x==y){
-                continue;
-            }
-            f[y]=max((int)((f[x]+1)/2+(f[y]+1)/2+1),max(f[x],f[y]));
-            f[x]=0;
-            merge(x,y);
-        }else{
-            cout&lt;&lt;f[getfa(x)]&lt;&lt;endl;
-        }
-    }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2022年多校冲刺NOIP联训测试3「翻转颜色」]]></title>
-        <id>https://2019yyy.github.io/post/reverse-color/</id>
-        <link href="https://2019yyy.github.io/post/reverse-color/">
-        </link>
-        <updated>2022-08-01T10:42:33.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目描述">「题目描述」</h2>
+<title>2022年多校冲刺NOIP联训测试3「翻转颜色」 | yyy&#39;s blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://2019yyy.github.io/favicon.ico?v=1659357113893">
+<link rel="stylesheet" href="https://2019yyy.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="「题目描述」
+给定一个长度为 2n2n2n 的字符串 SSS，SSS 表示 2n2n2n 个格子的染色情况。SiS_iSi​ （111 ≤ iii ≤$ 2n $）
+为 BBB 时表示第 iii 个格子为黑色；否则 SiS_iSi​ 为 W..." />
+    <meta name="keywords" content="题解" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://2019yyy.github.io">
+        <img src="https://2019yyy.github.io/images/avatar.png?v=1659357113893" class="site-logo">
+        <h1 class="site-title">yyy&#39;s blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      打不动的分块,戒不掉的珂毒
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://2019yyy.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">2022年多校冲刺NOIP联训测试3「翻转颜色」</h2>
+            <div class="post-date">2022-08-01</div>
+            
+              <div class="feature-container" style="background-image: url('https://tva4.sinaimg.cn/large/0072Vf1pgy1foxlnu5w7cj31kw0w0hcd.jpg')">
+              </div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="题目描述">「题目描述」</h2>
 <p>给定一个长度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">n</span></span></span></span> 的字符串 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span></span></span></span> 表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">n</span></span></span></span> 个格子的染色情况。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> （<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span> ≤ <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> ≤$ 2n $）</p>
 <p>为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span> 时表示第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个格子为黑色；否则 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>S</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">S_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.05764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>W</mi></mrow><annotation encoding="application/x-tex">W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">W</span></span></span></span>，表示第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span> 个格子为白色。</p>
 <p>你需要进行恰好 n 次操作，使得所有格子的颜色都变为白色。第 i 次操作时，你可以选择两个未在之前操作中选择过的格子 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">li</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span></span></span></span>,<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ri</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span></span></span></span>（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">li</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">i</span></span></span></span> &lt; <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">ri</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span></span></span></span>），并翻转所有下标在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mi>l</mi><mi>i</mi><mo separator="true">,</mo><mi>r</mi><mi>i</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">[li
@@ -245,6 +181,45 @@ int main(){
 	return 0;
 }
 </code></pre>
-]]></content>
-    </entry>
-</feed>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://2019yyy.github.io/tag/solutions/" class="tag">
+                    题解
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
